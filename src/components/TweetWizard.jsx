@@ -32,6 +32,8 @@ const TweetWizard = () => {
       })
       .then((res) => {
         console.log(res.data);
+        // this is a hack to reload the page
+        window.location.reload();
       })
       .catch((err) => {
         console.error(err);
