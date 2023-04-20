@@ -13,11 +13,11 @@ const ProfileView = () => {
     const getData = async () => {
       const {
         data: { user },
-      } = await axios.get(`${WEB_URL}/api/users/${uid}`);
+      } = await axios.get(WEB_URL + "/api/users/" + uid);
       setProfile(user);
       const {
         data: { tweets },
-      } = await axios.get(`${WEB_URL}/api/tweets/${uid}`);
+      } = await axios.get(WEB_URL + "/api/tweets/" + uid);
       setProfileTweets(tweets);
     };
     getData();
@@ -26,7 +26,9 @@ const ProfileView = () => {
 
   return (
     <Container>
-      <div>Profile view for {profile && profile.name}</div>
+      <h1 className="text-center">
+        Profile view for {profile && profile.name}
+      </h1>
     </Container>
   );
 };

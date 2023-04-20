@@ -1,10 +1,12 @@
-const Container = ({ children }) => {
-  return <div className="container mx-auto px-4">{children}</div>;
+const Container = ({ children, className }) => {
+  return (
+    <div className={`container mx-auto px-4 ${className}`}>{children}</div>
+  );
 };
 
 export const AppContainer = ({ children }) => {
   return (
-    <div className="min-w-screen min-h-screen bg-slate-300 pt-12">
+    <div className="min-w-screen min-h-screen bg-slate-300 py-12">
       {children}
     </div>
   );

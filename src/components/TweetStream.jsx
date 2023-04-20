@@ -2,6 +2,7 @@ import axios from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import { WEB_URL } from "../lib/CONSTANTS";
 
 dayjs.extend(relativeTime);
@@ -12,7 +13,6 @@ const TweetStream = () => {
   useEffect(() => {
     const getTweets = async () => {
       const res = await axios.get(WEB_URL + "/api/tweets");
-      console.log(res);
       if (res.data.status === "ok") {
         const newTweets = res.data.tweets;
         setTweets(newTweets);
@@ -39,15 +39,18 @@ const TweetStream = () => {
                 className="w-14 rounded-full"
               />
               <div className="flex flex-col gap-2">
-                <a href={`/users/${tweet.user.uid}`} className="flex gap-1">
-                  <span className="font-medium">
+                <Link
+                  to={`/users/${tweet.user.uid}`}
+                  className="flex gap-1 group"
+                >
+                  <span className="font-medium group-hover:underline">
                     {userNameHack(tweet.user)}
                   </span>
-                  <span>-</span>
-                  <span className="opacity-40 font-normal">
+                  <span className="opacity-40">•</span>
+                  <span className="opacity-40">
                     {dayjs(tweet.created_at).fromNow()}
                   </span>
-                </a>
+                </Link>
                 <p>{tweet.body}</p>
               </div>
             </div>
