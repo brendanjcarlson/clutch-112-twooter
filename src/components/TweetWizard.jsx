@@ -46,6 +46,7 @@ const TweetWizard = () => {
     setValue("");
     setDisabled(true);
   };
+
   const handleChange = (e) => {
     const validator = z.string().emoji().max(255);
     const current = e.target.value;
