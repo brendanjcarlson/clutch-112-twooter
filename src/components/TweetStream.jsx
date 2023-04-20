@@ -11,16 +11,16 @@ const filterByUser = (tweets, uid) => {
   return tweets.filter((tweet) => tweet.user.uid === uid);
 };
 
+const userNameHack = ({ name, uid }) => {
+  const nameArr = name.split(" ").join("-").toLowerCase();
+  const uidSlice = uid.split("").slice(0, 6).join("");
+  return `@${nameArr}-${uidSlice}`;
+};
+
 const TweetStream = () => {
   const { uid } = useParams();
   const res = resource.res.read();
   const tweets = uid ? filterByUser(res.tweets, uid) : res.tweets;
-
-  const userNameHack = ({ name, uid }) => {
-    const nameArr = name.split(" ").join("-").toLowerCase();
-    const uidSlice = uid.split("").slice(0, 6).join("");
-    return `@${nameArr}-${uidSlice}`;
-  };
 
   return (
     <div className="flex flex-col gap-4 mx-auto max-w-lg">

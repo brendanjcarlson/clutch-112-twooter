@@ -9,7 +9,6 @@ import { WEB_URL } from "../lib/CONSTANTS";
 const ProfileView = () => {
   const { uid } = useParams();
   const [profile, setProfile] = useState({});
-  const [profileTweets, setProfileTweets] = useState([]);
 
   useEffect(() => {
     const getData = async () => {
@@ -17,10 +16,6 @@ const ProfileView = () => {
         data: { user },
       } = await axios.get(WEB_URL + "/api/users/" + uid);
       setProfile(user);
-      const {
-        data: { tweets },
-      } = await axios.get(WEB_URL + "/api/tweets/" + uid);
-      setProfileTweets(tweets);
     };
     getData();
     // eslint-disable-next-line
