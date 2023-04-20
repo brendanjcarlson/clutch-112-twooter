@@ -1,6 +1,7 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { Link, useParams } from "react-router-dom";
+import { z } from "zod";
 import { getAllTweets, withPromise } from "../lib/api";
 
 dayjs.extend(relativeTime);
@@ -9,6 +10,23 @@ const resource = withPromise(getAllTweets);
 
 const filterByUser = (tweets, uid) => {
   return tweets.filter((tweet) => tweet.user.uid === uid);
+};
+
+const filterByEmoji = (tweets) => {
+  return tweets.filter((tweet) => {
+    const validator = z.string().emoji();
+    try {
+      validator.parse(tweet.body);
+      return true;
+    } catch (err) {
+      return false;
+    }
+  });
+};
+
+const applyFilters = (tweets, uid) => {
+  const filteredByUser = uid ? filterByUser(tweets, uid) : tweets;
+  return filterByEmoji(filteredByUser);
 };
 
 const userNameHack = ({ name, uid }) => {
@@ -20,7 +38,7 @@ const userNameHack = ({ name, uid }) => {
 const TweetStream = () => {
   const { uid } = useParams();
   const res = resource.res.read();
-  const tweets = uid ? filterByUser(res.tweets, uid) : res.tweets;
+  const tweets = uid ? applyFilters(res.tweets, uid) : res.tweets;
 
   return (
     <div className="flex flex-col gap-4 mx-auto max-w-lg">
