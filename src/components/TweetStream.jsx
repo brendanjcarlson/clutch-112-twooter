@@ -1,25 +1,15 @@
-import axios from "axios";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import { WEB_URL } from "../lib/CONSTANTS";
+import { getAllTweets, withPromise } from "../lib/api";
 
 dayjs.extend(relativeTime);
 
-const TweetStream = () => {
-  const [tweets, setTweets] = useState([]);
+const resource = withPromise(getAllTweets);
 
-  useEffect(() => {
-    const getTweets = async () => {
-      const res = await axios.get(WEB_URL + "/api/tweets");
-      if (res.data.status === "ok") {
-        const newTweets = res.data.tweets;
-        setTweets(newTweets);
-      }
-    };
-    getTweets();
-  }, []);
+const TweetStream = () => {
+  const data = resource.res.read();
+  const tweets = data && data.tweets;
 
   const userNameHack = ({ name, uid }) => {
     const nameArr = name.split(" ").join("-").toLowerCase();
@@ -37,6 +27,7 @@ const TweetStream = () => {
                 src={tweet.user.img}
                 alt={tweet.user.name}
                 className="w-14 rounded-full"
+                referrerPolicy="no-referrer"
               />
               <div className="flex flex-col gap-2">
                 <Link
