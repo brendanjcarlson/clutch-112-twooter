@@ -15,12 +15,13 @@ const filterByUser = (tweets, uid) => {
 const filterByEmoji = (tweets) => {
   return tweets.filter(({ body }) => {
     const validator = z.string().emoji();
+    let keep = true;
     try {
       validator.parse(body);
-      return true;
     } catch (err) {
-      return false;
+      keep = false;
     }
+    return keep;
   });
 };
 

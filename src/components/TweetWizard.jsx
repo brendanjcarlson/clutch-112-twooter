@@ -65,7 +65,7 @@ const TweetWizard = () => {
     setValue(current);
   };
 
-  if (!user.loggedIn) return;
+  if (!user.loggedIn) return
 
   return (
     <Container className="mb-4">
