@@ -4,6 +4,7 @@ import { AppContainer } from "./components/Container";
 import Navbar from "./components/Navbar";
 import "./styles/globals.css";
 import HomeView from "./views/HomeView";
+import ProfileView from "./views/ProfileView";
 
 function App() {
   return (
@@ -12,7 +13,8 @@ function App() {
       <Toaster containerClassName="mt-16" />
       <AppContainer>
         <Routes>
-          <Route path="/" element={<HomeView />}/>
+          <Route path="/" element={<HomeView />} />
+          <Route path="/users/:uid" element={<ProfileView />} />
         </Routes>
       </AppContainer>
     </div>

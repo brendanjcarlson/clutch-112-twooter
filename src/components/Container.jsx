@@ -4,7 +4,9 @@ const Container = ({ children }) => {
 
 export const AppContainer = ({ children }) => {
   return (
-    <div className="min-w-screen min-h-screen bg-slate-300">{children}</div>
+    <div className="min-w-screen min-h-screen bg-slate-300 pt-12">
+      {children}
+    </div>
   );
 };
 

@@ -36,7 +36,7 @@ const Navbar = () => {
   return (
     <div className="navbar bg-base-100 shadow-md">
       <div className="flex-1">
-        <Link href="/" className="btn btn-ghost normal-case text-xl">
+        <Link href="/home" className="btn btn-ghost normal-case text-xl">
           twooter🐣
         </Link>
       </div>

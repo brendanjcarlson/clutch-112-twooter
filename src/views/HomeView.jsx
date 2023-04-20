@@ -4,7 +4,7 @@ import TweetStream from "../components/TweetStream";
 const HomeView = () => {
   return (
     <Container>
-      <h1>Home View</h1>
+      <h1 className="text-center mb-4">Home View</h1>
       <TweetStream />
     </Container>
   );
