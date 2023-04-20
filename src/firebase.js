@@ -15,3 +15,7 @@ const firebaseConfig = {
 
 // Initialize Firebase
 export const app = initializeApp(firebaseConfig);
+
+// Your firebase config can be public because it's not a secret.
+// It's just a way to identify your app to firebase.
+// Google handles the security of your data.
