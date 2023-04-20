@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../context/AuthProvider";
 
@@ -32,9 +32,29 @@ const Avatar = ({ user, logout }) => {
 
 const Navbar = () => {
   const { user, login, logout } = useContext(AuthContext);
+  const navRef = useRef(null);
+  const [scrollPos, setScrollPos] = useState(0);
+
+  const handleScroll = () => {
+    const currentScrollPos = window.pageYOffset;
+    if (currentScrollPos > scrollPos) {
+      navRef.current.style.top = "-100px";
+    } else {
+      navRef.current.style.top = "0px";
+    }
+    setScrollPos(currentScrollPos);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [scrollPos]);
 
   return (
-    <div className="navbar bg-base-100 shadow-md">
+    <div
+      ref={navRef}
+      className="navbar bg-base-100 shadow-md sticky top-0 transition-all duration-200 z-10"
+    >
       <div className="flex-1">
         <Link to="/" className="btn btn-ghost normal-case text-xl">
           twooter🐣
