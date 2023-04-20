@@ -13,7 +13,7 @@ const TweetWizard = () => {
   const [value, setValue] = useState("");
   const [disabled, setDisabled] = useState(true);
 
-  const postTweet = async (value) => {
+  const createTweet = async (value) => {
     const body = {
       user_uid: user.uid,
       body: value,
@@ -31,7 +31,7 @@ const TweetWizard = () => {
         error: "Failed to twoot.😢",
       })
       .then((res) => {
-        console.log(res.data.status);
+        console.log(res.data);
       })
       .catch((err) => {
         console.error(err);
@@ -40,8 +40,7 @@ const TweetWizard = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(value);
-    postTweet(value);
+    createTweet(value);
     setValue("");
     setDisabled(true);
   };
