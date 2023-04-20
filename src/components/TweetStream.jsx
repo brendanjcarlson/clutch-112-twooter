@@ -1,15 +1,20 @@
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import { getAllTweets, withPromise } from "../lib/api";
 
 dayjs.extend(relativeTime);
 
 const resource = withPromise(getAllTweets);
 
+const filterByUser = (tweets, uid) => {
+  return tweets.filter((tweet) => tweet.user.uid === uid);
+};
+
 const TweetStream = () => {
-  const data = resource.res.read();
-  const tweets = data && data.tweets;
+  const { uid } = useParams();
+  const res = resource.res.read();
+  const tweets = uid ? filterByUser(res.tweets, uid) : res.tweets;
 
   const userNameHack = ({ name, uid }) => {
     const nameArr = name.split(" ").join("-").toLowerCase();
