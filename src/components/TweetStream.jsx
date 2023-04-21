@@ -37,6 +37,7 @@ const userNameHack = ({ name, uid }) => {
 };
 
 const TweetStream = () => {
+  // this gets out /:uid route parameter from our dynamic routes
   const { uid } = useParams();
   const res = resource.res.read();
   const tweets = uid ? applyFilters(res.tweets, uid) : res.tweets;

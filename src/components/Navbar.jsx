@@ -32,6 +32,7 @@ const Avatar = ({ user, logout }) => {
 
 const Navbar = () => {
   const { user, login, logout } = useContext(AuthContext);
+  // useRef is how we target DOM elements in react
   const navRef = useRef(null);
   const [scrollPos, setScrollPos] = useState(0);
 
