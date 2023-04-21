@@ -12,7 +12,8 @@ function App() {
       <Toaster containerClassName="mt-16" />
       <AppContainer>
         <Routes>
-          <Route path="/" element={<HomeView />}/>
+          <Route path="/" element={<HomeView />} />
+          <Route path="/user/:uid" element={<div>hi</div>} />
         </Routes>
       </AppContainer>
     </div>
